@@ -1,0 +1,9 @@
+[package]
+name = "rpi-r503"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rppal = { version = "0.19.0", features = ["hal"] }
+r503 = { path = "../r503" }
+heapless = "0.8"
