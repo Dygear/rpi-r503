@@ -17,6 +17,23 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // The figerprint sensor itself has a buadrate of 57600, although that can be increased.
     let mut uart = Uart::new(57600, Parity::None, 8, 1)?;
 
+    // Set Fingerprint sensor color to default white.
+    let mut data_buf: Vec<u8, 32> = heapless::Vec::new();
+    let _ = data_buf.push(LightPattern::Breathing.into());  // Breathing Light
+    let _ = data_buf.push(0xFF);                            // 0 = Very Fast, 255 = Very Slow; Max Time = 5 Seconds.
+    let _ = data_buf.push(Color::White.into());             // colour=Red, Blue, Purple
+    let _ = data_buf.push(0x00);                            // times=Infinite
+    let send_buf = send(
+        Identifier::Command,
+        Instruction::AuraLedConfig,
+        Some(data_buf)
+    );
+    let data_write: [u8; 16] = send_buf.clone().into_array().unwrap();
+    match uart.write(&data_write) {
+        Ok(..) => (), // No News is Good News.
+        Err(e) => eprintln!("Write error: {:?}", e),
+    }
+
     loop {
         let edge = match touch.poll_interrupt(true, Some(Duration::from_secs(60))) {
             Ok(Some(event)) => event.trigger,
