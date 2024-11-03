@@ -16,7 +16,11 @@ We use rustup to install the rust compiler and cargo:
 You also want to install git. `sudo apt install git` -- You might need it.
 
 # Hardware
-UART connections are BCM Pin 14 / Physical Pin 8 for TX (Orange), and BCM Pin 15 / Physical Pin 10 for RX (Yellow).
-TOUCH GPIO is connected to BCM Pin 4 / Physical Pin 7 (Blue).
-GROUND is Physical Pin 14 (Black).
-3V3 is Physical Pain 17 (Red).
+* UART connections are:
+  * UART TX BCM Pin 14 / Physical Pin 8 for TX (Orange)
+  * UART RX BCM Pin 15 / Physical Pin 10 for RX (Yellow).
+* TOUCH GPIO BCM Pin 4 / Physical Pin 7 (Blue).
+* GROUND is Physical Pin 14 (Black).
+* 3V3 is Physical Pain 17 (Red).
+
+![GPIO](https://www.raspberrypi.com/documentation/computers/images/GPIO-Pinout-Diagram-2.png)

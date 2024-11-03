@@ -5,8 +5,8 @@ use r503::{Color, Identifier, Instruction, LightPattern};
 use heapless::Vec;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // BCM Pin 4 / Physical Pin 7 is connected to the touch sensor on our r503 module.
-    let mut touch = Gpio::new()?.get(4)?.into_input();
+    // BCM Pin 18 / Physical Pin 12 is connected to the touch sensor on our r503 module.
+    let mut touch = Gpio::new()?.get(18)?.into_input();
     match touch.set_interrupt(Trigger::Both, Some(Duration::from_millis(16))) {
         Ok(..) => println!("Touch event registered."),
         Err(e) => eprintln!("Touch event failed: {e:?}")
